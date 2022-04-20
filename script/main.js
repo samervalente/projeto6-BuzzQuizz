@@ -18,3 +18,31 @@ function renderizarTodosQuizzes(resposta){
 }
 
 listarTodosQuizzes()
+
+function criarQuizz(elemento){
+    document.querySelector(".tela1").classList.add("hidden")
+    document.querySelector(".tela3").classList.remove("hidden")
+}
+
+
+function prosseguir(){
+    verificaURL()
+}
+
+
+prosseguir()
+
+
+function verificaURL() {
+    let url = document.getElementById('URLQuizz').value;
+    var pattern = /^https:\/\//i;
+
+    // Check if pattern is there in the string 
+    // or not with .test() method
+    if (pattern.test(url)) {
+        alert("OK")
+    }
+    else {
+        alert("URL INVÁLIDA")
+    }
+}

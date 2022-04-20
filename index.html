@@ -24,10 +24,10 @@
     </header>
 
     <main>
-           <div class="container">
+           <div class="container tela1">
                <div class="quizzes-usuario">
                    <p>Você não criou nenhum quiz ainda :(</p> 
-                <button class="criarQuizz" onclick="criarQuizz()">Criar Quizz</button>
+                <button class="criarQuizz" onclick="criarQuizz(this)">Criar Quizz</button>
                </div>
                <div class="quizzes-todos">
                    <h4>Todos os Quizzes</h4>
@@ -35,6 +35,17 @@
                    </div>   
                </div>
            </div> 
+           
+           <div class="container tela3 hidden">
+               <h4>Comece pelo Começo</h4>
+               <div class="infos-quizz">
+                   <input minlength="20" maxlength="65" type="text" class="tituloQuizz" placeholder="Título do seu quizz">
+                   <input type="text" class="URLQuizz" placeholder="URL da imagem do seu quizz">
+                   <input type="text" class="QuantidadePerguntas" placeholder="Quantidade de perguntas do quizz">
+                   <input type="text" class="QuantidadeNíveis" placeholder="Quantidade de níveis do quizz">
+               </div>
+             <button onclick="prosseguir(this)">Prosseguir</button>
+           </div>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
