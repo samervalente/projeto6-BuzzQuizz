@@ -25,7 +25,19 @@
     </header>
 
     <main>
-      <div class="container esconder">
+      <div class="container">
+        <div class="container">
+          <div class="quizzes-usuario">
+            <p>Você não criou nenhum quiz ainda :(</p>
+            <button class="criarQuizz" onclick="criarQuizz()">
+              Criar Quizz
+            </button>
+          </div>
+          <div class="quizzes-todos">
+            <h4>Todos os Quizzes</h4>
+            <div class="quizzes"></div>
+          </div>
+        </div>
         <div class="quizzes-usuario">
           <p>Você não criou nenhum quiz ainda :(</p>
           <button class="criarQuizz" onclick="criarQuizz()">Criar Quizz</button>
@@ -62,35 +74,38 @@
           </div>
         </div>
       </div>
-      <div class="pagina-quizz">
-        <div class="imagem-superior">
-          <img src="src/images/Rectangle 34.png" />
-          <h1>O quão Potterhead é você?</h1>
-        </div>
-        <div class="quizz-box">
-          <h2>Em qual animal Olho-Tonto Moody transfigurou Malfoy?</h2>
-          <div>
-            <figure>
-              <img src="src/images/image 3.png" />
-              <figcaption>Gatíneo</figcaption>
-            </figure>
-            <figure>
-              <img src="src/images/image 4.png" />
-              <figcaption>Ratata</figcaption>
-            </figure>
-            <figure>
-              <img src="src/images/image 7.png" />
-              <figcaption>Sapo gordo</figcaption>
-            </figure>
-            <figure>
-              <img src="src/images/image 8.png" />
-              <figcaption>Mustela potorius (o Furão)</figcaption>
-            </figure>
+      <div class="container-2 esconder">
+        <div class="pagina-quizz">
+          <div class="imagem-superior">
+            <img src="src/images/Rectangle 34.png" />
+            <h1>O quão Potterhead é você?</h1>
+          </div>
+          <div class="quizz-box">
+            <h2>Em qual animal Olho-Tonto Moody transfigurou Malfoy?</h2>
+            <div>
+              <figure>
+                <img src="src/images/image 3.png" />
+                <figcaption>Gatíneo</figcaption>
+              </figure>
+              <figure>
+                <img src="src/images/image 4.png" />
+                <figcaption>Ratata</figcaption>
+              </figure>
+              <figure>
+                <img src="src/images/image 7.png" />
+                <figcaption>Sapo gordo</figcaption>
+              </figure>
+              <figure>
+                <img src="src/images/image 8.png" />
+                <figcaption>Mustela potorius (o Furão)</figcaption>
+              </figure>
+            </div>
           </div>
         </div>
       </div>
     </main>
 
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="script/main.js"></script>
   </body>
 </html>
