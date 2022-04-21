@@ -2,9 +2,6 @@
   box-sizing: border-box;
 }
 
-
-
-
 header div {
   display: flex;
   align-items: center;
@@ -16,7 +13,7 @@ header div {
   position: fixed;
   top: 0;
   left: 0;
-  z-index:1;
+  z-index: 1;
 }
 
 header h1 {
@@ -26,98 +23,103 @@ header h1 {
   font-family: "Roboto", "sans-serif";
 }
 
-button{
-    cursor:pointer;
+button {
+  cursor: pointer;
 }
 
 /*Tela 1*/
-.container{
-    max-width: 1050px;
-    margin: 55px auto;
-    font-family: "Roboto", "sans-serif";
-    margin-top: 120px;
-  }
-
-  .quizzes-usuario{
-    width:100%;
-    border:1px dashed #D5D5D5;
-    height:180px;
-    border-radius:5px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:space-around;
-    background-color:#FAFAFA;
-    margin-bottom:40px;
- }
-
- .quizzes-usuario p {
-    color: #b9b9b9;
-    font-size: 20px;
-  }
-
-  .tela1 button{
-    color: #EC362D;
-    border-radius:50px;
-    width:150px;
-    height:50px;
-    border: 1px dashed #EC362D;
-    background-color:#FAFAFA;
-    cursor:pointer;
-    font-size:21px;
-    font-weight:normal;
-   }
-
-   .tela1 button:hover {
-    background-color: rgba(240, 234, 234, 0.795);
-    transition: 0.6s;
-  }
-  
-.container h4{
-    font-weight:bold;
-    font-size:20px;
+.container {
+  max-width: 1050px;
+  margin: 55px auto;
+  font-family: "Roboto", "sans-serif";
+  margin-top: 120px;
 }
 
-.quizzes{
-    width:100%;
-    height:100%;
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:flex-start;
-    align-items:center;  
+.quizzes-usuario {
+  width: 100%;
+  border: 1px dashed #d5d5d5;
+  height: 180px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #fafafa;
+  margin-bottom: 40px;
+}
+
+.quizzes-usuario p {
+  color: #b9b9b9;
+  font-size: 20px;
+}
+
+.tela1 button {
+  color: #ec362d;
+  border-radius: 50px;
+  width: 150px;
+  height: 50px;
+  border: 1px dashed #ec362d;
+  background-color: #fafafa;
+  cursor: pointer;
+  font-size: 21px;
+  font-weight: normal;
+}
+
+.tela1 button:hover {
+  background-color: rgba(240, 234, 234, 0.795);
+  transition: 0.6s;
+}
+
+.container h4 {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.quizzes {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .quizz {
-    width: 340px;
-    height: 180px;
-    margin: 6px 5px;
-    position: relative;
-    text-align: center;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    cursor: pointer;
-    background: linear-gradient(180deg,rgba(175, 33, 33, 0) 0%, rgba(0, 0, 0, 0.7) 65.1%,#000000 100%);
-    border-radius: 5px;
-  }
+  width: 340px;
+  height: 180px;
+  margin: 6px 5px;
+  position: relative;
+  text-align: center;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  cursor: pointer;
+  background: linear-gradient(
+    180deg,
+    rgba(175, 33, 33, 0) 0%,
+    rgba(0, 0, 0, 0.7) 65.1%,
+    #000000 100%
+  );
+  border-radius: 5px;
+}
 
-  .quizz img {
-    width: 100%;
-    height: 100%;
-    -webkit-mask-image: linear-gradient(to top, transparent 0%, black 60%);
-    border-radius:5px;
-  }
+.quizz img {
+  width: 100%;
+  height: 100%;
+  -webkit-mask-image: linear-gradient(to top, transparent 0%, black 60%);
+  border-radius: 5px;
+}
 
 .titulo-quizz {
-    color: white;
-    font-size: 20px;
-    line-height: 22px;
-    font-weight: 400;
-    display: flex;
-    align-items: center;
-    min-height: 54px;
-    position:absolute;
-  }
+  color: white;
+  font-size: 20px;
+  line-height: 22px;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  min-height: 54px;
+  position: absolute;
+}
 /*Fim da tela 1*/
 
 /* Página 2 CSS */
@@ -156,7 +158,7 @@ button{
 
 .quizz-box {
   width: 756px;
-  height: 676px;
+  height: auto;
   padding: 35px;
   background-color: #ffffff;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
@@ -190,6 +192,8 @@ button{
   margin: 20px 0 10px 0;
 }
 .quizz-box > div > figure > figcaption {
+  width: 320px;
+  overflow-wrap: break-word;
   font-size: 20px;
   font-weight: bold;
   color: #000000;
@@ -197,52 +201,56 @@ button{
 /* Fim página 2 CSS */
 
 /*Tela 3 */
-.container.tela3-1{
-    display:flex;
-    flex-direction: column;
-    align-items:center;
+.container.tela3-1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.infos-quizz{
-    min-height:256px;
-    width:600px;
-    margin-top:10px;
-    padding: 15px 0px;
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
-    align-items:center;
-    background-color:#FFFFFF;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+.infos-quizz {
+  min-height: 256px;
+  width: 600px;
+  margin-top: 10px;
+  padding: 15px 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
 }
 
-.container input{
-    width:546px;
-    height:46px;
-    border-radius:5px;
-    border: 1px solid #D1D1D1;
-    font-style:italic;
+.container input {
+  width: 546px;
+  height: 46px;
+  border-radius: 5px;
+  border: 1px solid #d1d1d1;
+  font-style: italic;
 }
 
-.info-quizz .placeholder{
-    color:#BABABA;
-    padding-left: 10px;
+.info-quizz .placeholder {
+  color: #bababa;
+  padding-left: 10px;
 }
 
-.tela3-1 button{
-    background-color:#EC362D;
-    width: 368px;
-    height: 54px;
-    border-radius: 15px;
-    border:none;
-    font-size:21px;
-    color:#FFF5F4;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+.tela3-1 button {
+  background-color: #ec362d;
+  width: 368px;
+  height: 54px;
+  border-radius: 15px;
+  border: none;
+  font-size: 21px;
+  color: #fff5f4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /*Fim da Tela 3-1 */
-.container.esconder{
-    display:none;
+.container.esconder {
+  display: none;
+}
+
+.esconder {
+  display: none;
 }
