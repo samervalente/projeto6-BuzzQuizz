@@ -1,11 +1,37 @@
-@media (max-width:390px){
-
-  .container{
-      margin: 30px 15px;
-  }  
-
-  .quizzes-todos .quizz:last-child{
-      margin-bottom:70px;
+@media (max-width: 390px) {
+  .container {
+    margin: 30px 15px;
   }
 
+  .quizzes-todos .quizz:last-child {
+    margin-bottom: 70px;
+  }
+}
+
+@media (max-width: 1100px) {
+  .pagina-quizz .imagem-superior > img {
+    height: 142px;
+  }
+  .pagina-quizz .imagem-superior > h1 {
+    font-size: 19px;
+  }
+  .quizz-box {
+    width: 375px;
+    height: 436px;
+    padding: 18px;
+  }
+
+  .quizz-box > h2 {
+    height: 89px;
+    font-size: 19px;
+  }
+
+  .quizz-box > div > figure > img {
+    width: 163px;
+    height: 113px;
+    margin: 10px 0 10px 0;
+  }
+  .quizz-box > div > figure > figcaption {
+    font-size: 13px;
+  }
 }
