@@ -25,49 +25,24 @@
     </header>
 
     <main>
-        <!--Tela 1 (Listar todos os quizzes, incluindo os do usuário, caso houver)-->
-        <div class="container tela1">
-            <div class="quizzes-usuario">
-                <p>Você não criou nenhum quiz ainda :(</p> 
-                <button class="criarQuizz" onclick="criarQuizz(this)">Criar Quizz</button>
-            </div>
-            <div class="quizzes-todos">
-                <h4>Todos os Quizzes</h4>
-                <div class="quizzes">
-                </div>   
-            </div>
-        </div><!--Fim da tela 1-->
-           
+      <!--Tela 1 (Listar todos os quizzes, incluindo os do usuário, caso houver)-->
+      <div class="container tela1">
+        <div class="quizzes-usuario">
+          <p>Você não criou nenhum quiz ainda :(</p>
+          <button class="criarQuizz" onclick="criarQuizz(this)">
+            Criar Quizz
+          </button>
+        </div>
+        <div class="quizzes-todos">
+          <h4>Todos os Quizzes</h4>
+          <div class="quizzes"></div>
+        </div>
+      </div>
+      <!--Fim da tela 1-->
 
       <!--Tela 2 (Exibir um quizz)-->
-        <div class="container tela2 esconder">
-        <div class="pagina-quizz">
-          <div class="imagem-superior">
-            <img src="src/images/Rectangle 34.png" />
-            <h1>O quão Potterhead é você?</h1>
-          </div>
-          <div class="quizz-box">
-            <h2>Em qual animal Olho-Tonto Moody transfigurou Malfoy?</h2>
-            <div>
-              <figure>
-                <img src="src/images/image 3.png" />
-                <figcaption>Gatíneo</figcaption>
-              </figure>
-              <figure>
-                <img src="src/images/image 4.png" />
-                <figcaption>Ratata</figcaption>
-              </figure>
-              <figure>
-                <img src="src/images/image 7.png" />
-                <figcaption>Sapo gordo</figcaption>
-              </figure>
-              <figure>
-                <img src="src/images/image 8.png" />
-                <figcaption>Mustela potorius (o Furão)</figcaption>
-              </figure>
-            </div>
-          </div>
-        </div>
+      <div class="tela2 esconder">
+        <div class="pagina-quizz"></div>
       </div>
       <!--Fim da tela 2-->
 
@@ -75,10 +50,28 @@
       <div class="container tela3-1 esconder">
         <h4>Comece pelo Começo</h4>
         <div class="infos-quizz">
-            <input minlength="20" maxlength="65" type="text" class="tituloQuizz" placeholder="Título do seu quizz">
-            <input type="text" class="URLImagem" placeholder="URL da imagem do seu quizz">
-            <input type="text" class="QuantidadePerguntas" placeholder="Quantidade de perguntas do quizz">
-            <input type="text" class="QuantidadeNíveis" placeholder="Quantidade de níveis do quizz">
+          <input
+            minlength="20"
+            maxlength="65"
+            type="text"
+            class="tituloQuizz"
+            placeholder="Título do seu quizz"
+          />
+          <input
+            type="text"
+            class="URLImagem"
+            placeholder="URL da imagem do seu quizz"
+          />
+          <input
+            type="text"
+            class="QuantidadePerguntas"
+            placeholder="Quantidade de perguntas do quizz"
+          />
+          <input
+            type="text"
+            class="QuantidadeNíveis"
+            placeholder="Quantidade de níveis do quizz"
+          />
         </div>
       <button onclick="prosseguir()">Prosseguir para criar perguntas</button>
     </div>

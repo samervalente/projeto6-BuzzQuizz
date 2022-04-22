@@ -33,5 +33,6 @@
   }
   .quizz-box > div > figure > figcaption {
     font-size: 13px;
+    width: 163px;
   }
 }
