@@ -4,6 +4,9 @@ let url;
 let tituloQuizz;
 let objetosAPI = [];
 let quizz = [];
+let numPergunta;
+
+//Tela 1 JS
 
 function listarTodosQuizzes() {
   let promise = axios.get(
@@ -34,28 +37,7 @@ function criarQuizz() {
   document.querySelector(".tela3-1").classList.remove("esconder");
 }
 
-function prosseguir() {
-  if (validarInformaçõesQuizz()) {
-    document.querySelector(".container.tela3-1").classList.add("esconder");
-  }
-}
-
-function validarInformaçõesQuizz() {
-  quantidadePerguntas = Number(
-    document.querySelector(".QuantidadePerguntas").value
-  );
-  quantidadeNiveis = Number(document.querySelector(".QuantidadeNíveis").value);
-  url = document
-    .querySelector(".infos-quizz")
-    .querySelector(".URLImagem").value;
-  var pattern = /^https:\/\//i;
-  if (pattern.test(url)) {
-    return true;
-  } else {
-    alert("Preencha os dados corretamente");
-    return false;
-  }
-}
+//Tela 2 JS
 
 function abrirQuizz(id) {
   quizz = objetosAPI.find((objeto) => objeto.id === Number(id));
@@ -77,8 +59,10 @@ function renderizarTela2() {
   for (let i = 0; i < quizz.questions.length; i++) {
     paginaQuizz.innerHTML += `
       <div class="quizz-box">
-        <h2 style="background-color:${quizz.questions[i].color} ;">${quizz.questions[i].title}</h2>
-      <div class="imagensQuizz"></div>
+        <h2 style="background-color:${quizz.questions[i].color};">${
+      quizz.questions[i].title
+    }</h2>
+      <div class="imagensQuizz pergunta${i + 1}"></div>
       </div>
     `;
     let listaEmbaralhar = quizz.questions[i].answers;
@@ -90,7 +74,7 @@ function renderizarTela2() {
         `.quizz-box:nth-child(${k}) > .imagensQuizz`
       );
       imagensQuizz.innerHTML += `
-         <figure>
+         <figure onclick="escolherResposta(this)">
            <img src=${listaEmbaralhar[j].image} />
            <figcaption>${listaEmbaralhar[j].text}</figcaption>
          </figure>
@@ -103,4 +87,146 @@ function random() {
   return Math.random() - 0.5;
 }
 
-function obterObjetos() {}
+function escolherResposta(el) {
+  console.log(el);
+  // for (let i = 0; i < quizz.questions.length; i++) {
+  //   let resposta = document.querySelector(`.pergunta${i + 1} > .selecionado`);
+
+  //   if (resposta === null) {
+  //     document
+  //       .querySelectorAll(`.pergunta${i + 1} > figure`)
+  //       .forEach((element) => {
+  //         element.classList.add("naoSelecionado");
+  //       });
+  //     el.classList.add("selecionado");
+  //   }
+  // }
+  const parent = el.parentNode;
+  console.log(parent.children);
+  for (let i = 0; i < parent.children.length; i++) {
+    parent.children[i].classList.add("naoSelecionado");
+    parent.children[i].removeAttribute("onclick");
+  }
+  el.classList.remove("naoSelecionado");
+  el.classList.add("selecionado");
+  // parent.children.forEach((element) => {
+  //   element.classList.add("naoSelecionado");
+  // });
+}
+
+//Tela 3.1 JS
+
+function validarInformaçõesQuizz() {
+  tituloQuizz = document.querySelector(".tituloQuizz").value;
+  quantidadePerguntas = Number(
+    document.querySelector(".QuantidadePerguntas").value
+  );
+  quantidadeNiveis = Number(document.querySelector(".QuantidadeNíveis").value);
+  url = document
+    .querySelector(".infos-quizz")
+    .querySelector(".URLImagem").value;
+
+  var pattern = /^https:\/\//i;
+  if (pattern.test(url)) {
+    return true;
+  } else {
+    alert("Preencha os dados corretamente");
+    return false;
+  }
+}
+
+function getInfoQuizz() {
+  console.log(tituloQuizz);
+  console.log(quantidadePerguntas);
+  console.log(quantidadeNiveis);
+  console.log(url);
+}
+
+//Tela 3.2 JS
+
+function prosseguir() {
+  if (validarInformaçõesQuizz()) {
+    getInfoQuizz();
+    gerarQuantidadePerguntas();
+    document.querySelector(".container.tela3-1").classList.add("esconder");
+    document.querySelector(".container.tela3-2").classList.remove("esconder");
+  }
+}
+
+function gerarQuantidadePerguntas() {
+  let containerPerguntas = document.querySelector(".perguntas");
+  containerPerguntas.innerHTML += `<div class="Pergunta1 aberta">
+        <h4 class="num1">Pergunta 1</h4>
+        <div class="Pergunta">
+          <input minlength="20" maxlength="65" type="text" class="tituloPergunta" placeholder="Texto da pergunta">
+          <input type="text" class="URLImagem" placeholder="Cor de fundo da pergunta">
+        </div>
+     
+        <h4>Resposta correta</h4>
+        <div class="Resposta-Correta">
+          <input type="text" class="RespostaCorreta" placeholder="Resposta correta">
+        <input type="text" class="URLImagemCorreta" placeholder="URL da imagem">
+        </div>
+        
+        <h4>Respostas Incorretas</h4>
+        <div class="Resposta-Incorreta">
+  
+          <input type="text" class="RespostaIncorreta" placeholder="Resposta incorreta 1">
+          <input type="text" class="URLImagemInCorreta" placeholder="URL da imagem 1">
+        </div>
+       
+        <div class="Resposta-Incorreta">
+          <input type="text" class="RespostaIncorreta" placeholder="Resposta incorreta 2">
+          <input type="text" class="URLImagemInCorreta" placeholder="URL da imagem 2">
+        </div>
+       
+        <div class="Resposta-Incorreta">
+          <input type="text" class="RespostaIncorreta" placeholder="Resposta incorreta 3">
+        <input type="text" class="URLImagemInCorreta" placeholder="URL da imagem 3">
+        </div>
+      </div>`;
+
+  for (let i = 1 + 1; i <= quantidadePerguntas; i++) {
+    numPergunta = i;
+    containerPerguntas.innerHTML += `<div class="pergunta-element fechada">
+        <h4 class="numPergunta">Pergunta${i}</h4> 
+        <ion-icon name="open-outline" onclick="abrirPergunta(this)"></ion-icon> 
+      </div> `;
+  }
+}
+
+function abrirPergunta(pergunta) {
+  pergunta.parentNode.classList.add("crescer");
+  pergunta.classList.add("esconder");
+  pergunta.classList.remove("pergunta-element");
+  pergunta.parentNode.innerHTML += `
+        <div class="Pergunta1">
+        <div class="Pergunta">
+          <input minlength="20" maxlength="65" type="text" class="tituloPergunta" placeholder="Texto da pergunta">
+          <input type="text" class="URLImagem" placeholder="Cor de fundo da pergunta">
+        </div>
+     
+        <h4>Resposta correta</h4>
+        <div class="Resposta-Correta">
+          <input type="text" class="RespostaCorreta" placeholder="Resposta correta">
+        <input type="text" class="URLImagemCorreta" placeholder="URL da imagem">
+        </div>
+        
+        <h4>Respostas Incorretas</h4>
+        <div class="Resposta-Incorreta">
+  
+          <input type="text" class="RespostaIncorreta" placeholder="Resposta incorreta 1">
+          <input type="text" class="URLImagemInCorreta" placeholder="URL da imagem 1">
+        </div>
+       
+        <div class="Resposta-Incorreta">
+          <input type="text" class="RespostaIncorreta" placeholder="Resposta incorreta 2">
+          <input type="text" class="URLImagemInCorreta" placeholder="URL da imagem 2">
+        </div>
+       
+        <div class="Resposta-Incorreta">
+          <input type="text" class="RespostaIncorreta" placeholder="Resposta incorreta 3">
+        <input type="text" class="URLImagemInCorreta" placeholder="URL da imagem 3">
+        </div>
+      </div>`;
+}

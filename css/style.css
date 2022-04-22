@@ -30,9 +30,54 @@ button {
 /*Tela 1*/
 .container {
   max-width: 1050px;
+  height: auto;
   margin: 55px auto;
   font-family: "Roboto", "sans-serif";
   margin-top: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.quizzes-usuario {
+  width: 100%;
+  border: 1px dashed #d5d5d5;
+  height: 180px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #fafafa;
+  margin-bottom: 40px;
+}
+
+.quizzes-usuario p {
+  color: #b9b9b9;
+  font-size: 20px;
+}
+
+.tela1 button {
+  color: #ec362d;
+  border-radius: 50px;
+  width: 150px;
+  height: 50px;
+  border: 1px dashed #ec362d;
+  background-color: #fafafa;
+  cursor: pointer;
+  font-size: 21px;
+  font-weight: normal;
+}
+
+.tela1 button:hover {
+  background-color: rgba(240, 234, 234, 0.795);
+  transition: 0.6s;
+}
+
+.container h4 {
+  font-weight: bold;
+  font-size: 20px;
 }
 
 .quizzes-usuario {
@@ -122,7 +167,7 @@ button {
 }
 /*Fim da tela 1*/
 
-/* Página 2 CSS */
+/* Tela 2 CSS */
 .pagina-quizz {
   background-color: #fafafa;
   font-family: "Roboto", sans-serif;
@@ -191,12 +236,21 @@ button {
   object-fit: cover;
   margin: 20px 0 10px 0;
 }
+
 .quizz-box > div > figure > figcaption {
   width: 320px;
   overflow-wrap: break-word;
   font-size: 20px;
   font-weight: bold;
   color: #000000;
+}
+
+.naoSelecionado {
+  opacity: 0.3;
+}
+
+.selecionado {
+  opacity: 1;
 }
 /* Fim página 2 CSS */
 
@@ -226,6 +280,8 @@ button {
   border-radius: 5px;
   border: 1px solid #d1d1d1;
   font-style: italic;
+  margin: 5px 0px;
+  padding-left: 10px;
 }
 
 .info-quizz .placeholder {
@@ -233,7 +289,8 @@ button {
   padding-left: 10px;
 }
 
-.tela3-1 button {
+.tela3-1 button,
+.tela3-2 button {
   background-color: #ec362d;
   width: 368px;
   height: 54px;
@@ -244,9 +301,59 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 20px;
 }
 
 /*Fim da Tela 3-1 */
+
+.Pergunta1,
+.pergunta-element {
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+  padding-top: 5px;
+  margin-top: 10px;
+}
+
+.perguntas {
+  width: 580px;
+}
+
+.Pergunta,
+.Resposta-Correta,
+.Resposta-Incorreta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 18px 0px;
+}
+
+.tela3-2 ion-icon {
+  font-size: 20px;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.pergunta-element.fechada {
+  display: flex;
+  justify-content: space-between;
+  margin: 25px 0px;
+  transition: all linear 0.5s;
+}
+
+.crescer {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.pergunta-element h4 {
+  margin: 15px 0px 15px 15px;
+}
+
+.Pergunta1.aberta h4 {
+  margin: 15px 0px 5px 15px;
+}
+
 .container.esconder {
   display: none;
 }
