@@ -81,17 +81,26 @@ function renderizarTela2() {
       <div class="imagensQuizz"></div>
       </div>
     `;
+    let listaEmbaralhar = quizz.questions[i].answers;
+    listaEmbaralhar.sort(random);
+
     for (let j = 0; j < quizz.questions[i].answers.length; j++) {
       k = i + 2;
       imagensQuizz = document.querySelector(
         `.quizz-box:nth-child(${k}) > .imagensQuizz`
       );
       imagensQuizz.innerHTML += `
-        <figure>
-          <img src=${quizz.questions[i].answers[j].image} />
-          <figcaption>${quizz.questions[i].answers[j].text}</figcaption>
-        </figure>
+         <figure>
+           <img src=${listaEmbaralhar[j].image} />
+           <figcaption>${listaEmbaralhar[j].text}</figcaption>
+         </figure>
       `;
     }
   }
 }
+
+function random() {
+  return Math.random() - 0.5;
+}
+
+function obterObjetos() {}
