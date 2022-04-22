@@ -5,6 +5,7 @@ let tituloQuizz;
 let objetosAPI = [];
 let quizz = [];
 let numPergunta;
+num = 0;
 
 //Tela 1 JS
 
@@ -45,6 +46,7 @@ function abrirQuizz(id) {
   document.querySelector(".tela1").classList.add("esconder");
   document.querySelector(".tela2").classList.remove("esconder");
   renderizarTela2();
+  scrollTop();
 }
 
 function renderizarTela2() {
@@ -58,7 +60,7 @@ function renderizarTela2() {
   `;
   for (let i = 0; i < quizz.questions.length; i++) {
     paginaQuizz.innerHTML += `
-      <div class="quizz-box">
+      <div class="quizz-box box${i + 1}">
         <h2 style="background-color:${quizz.questions[i].color};">${
       quizz.questions[i].title
     }</h2>
@@ -76,7 +78,8 @@ function renderizarTela2() {
       imagensQuizz.innerHTML += `
          <figure onclick="escolherResposta(this)">
            <img src=${listaEmbaralhar[j].image} />
-           <figcaption>${listaEmbaralhar[j].text}</figcaption>
+           <div class="answer esconder">${listaEmbaralhar[j].isCorrectAnswer}</div>
+           <figcaption class="resposta-certa">${listaEmbaralhar[j].text}</figcaption>
          </figure>
       `;
     }
@@ -88,30 +91,37 @@ function random() {
 }
 
 function escolherResposta(el) {
-  console.log(el);
-  // for (let i = 0; i < quizz.questions.length; i++) {
-  //   let resposta = document.querySelector(`.pergunta${i + 1} > .selecionado`);
-
-  //   if (resposta === null) {
-  //     document
-  //       .querySelectorAll(`.pergunta${i + 1} > figure`)
-  //       .forEach((element) => {
-  //         element.classList.add("naoSelecionado");
-  //       });
-  //     el.classList.add("selecionado");
-  //   }
-  // }
   const parent = el.parentNode;
-  console.log(parent.children);
   for (let i = 0; i < parent.children.length; i++) {
     parent.children[i].classList.add("naoSelecionado");
     parent.children[i].removeAttribute("onclick");
+    console.log(
+      parent.querySelector(`figure:nth-child(${i + 1}) > div`).innerHTML
+    );
+    const ehCorreto = parent.querySelector(
+      `figure:nth-child(${i + 1}) > div`
+    ).innerHTML;
+    if (ehCorreto == "true") {
+      parent.children[i].classList.add("resposta-certa");
+    } else {
+      parent.children[i].classList.add("resposta-errada");
+    }
   }
   el.classList.remove("naoSelecionado");
   el.classList.add("selecionado");
-  // parent.children.forEach((element) => {
-  //   element.classList.add("naoSelecionado");
-  // });
+  scrollNext();
+}
+
+function scrollTop() {
+  window.scrollTo(0, 0);
+}
+
+function scrollNext() {
+  num++;
+  const nextElement = document.querySelector(".box" + num).nextElementSibling;
+  setTimeout(function () {
+    nextElement.scrollIntoView({ behavior: "smooth", block: "center" });
+  }, 2000);
 }
 
 //Tela 3.1 JS
