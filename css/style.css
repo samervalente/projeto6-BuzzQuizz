@@ -168,9 +168,12 @@ button {
 /*Fim da tela 1*/
 
 /* Tela 2 CSS */
-.pagina-quizz {
+.tela2 {
   background-color: #fafafa;
   font-family: "Roboto", sans-serif;
+}
+
+.pagina-quizz {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -218,6 +221,7 @@ button {
   color: #ffffff;
   font-weight: bold;
   font-size: 23px;
+  padding: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -258,6 +262,53 @@ button {
 
 .resposta-errada > figcaption {
   color: #ff0b0b;
+}
+
+.final-quizz {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.imagemResultado {
+  display: flex;
+  margin-top: 20px;
+}
+
+.imagemResultado > img {
+  width: 364px;
+  height: 273px;
+  object-fit: cover;
+  margin-right: 20px;
+}
+
+.imagemResultado > h2 {
+  width: 300px;
+  height: 273px;
+  font-size: 19px;
+  color: #484848;
+  overflow-wrap: break-word;
+}
+
+.reiniciar {
+  width: 260px;
+  height: 52px;
+  background-color: #ec362d;
+  border-radius: 15px;
+  color: #fff5f4;
+  font-size: 21px;
+  margin: 5px 0;
+}
+
+.voltar {
+  width: 260px;
+  height: 52px;
+  background-color: #fafafa;
+  color: #818181;
+  font-size: 21px;
+  border: 1px solid #fafafa;
+  margin: 5px 0 50px 0;
 }
 /* Fim página 2 CSS */
 

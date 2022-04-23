@@ -5,6 +5,12 @@ let tituloQuizz;
 let objetosAPI = [];
 let quizz = [];
 let numPergunta;
+let finalQuizz;
+let pontuacao;
+let tituloResultado;
+let textoResultado;
+let imagemResultado;
+let contador;
 num = 0;
 
 //Tela 1 JS
@@ -59,12 +65,11 @@ function renderizarTela2() {
     </div>
   `;
   for (let i = 0; i < quizz.questions.length; i++) {
+    contador = i + 1;
     paginaQuizz.innerHTML += `
-      <div class="quizz-box box${i + 1}">
-        <h2 style="background-color:${quizz.questions[i].color};">${
-      quizz.questions[i].title
-    }</h2>
-      <div class="imagensQuizz pergunta${i + 1}"></div>
+      <div class="quizz-box box${contador}">
+        <h2 style="background-color:${quizz.questions[i].color};">${quizz.questions[i].title}</h2>
+      <div class="imagensQuizz pergunta${contador}"></div>
       </div>
     `;
     let listaEmbaralhar = quizz.questions[i].answers;
@@ -83,6 +88,50 @@ function renderizarTela2() {
          </figure>
       `;
     }
+  }
+}
+
+function respostasCertas() {
+  const acertos = document.querySelectorAll(
+    ".resposta-certa.selecionado"
+  ).length;
+  const erros = document.querySelectorAll(
+    ".resposta-errada.selecionado"
+  ).length;
+  pontuacao = Math.round((acertos / (acertos + erros)) * 100);
+}
+
+function renderizarResposta() {
+  finalQuizz = document.querySelector(".final-quizz");
+  const numeroSelecionados = document.querySelectorAll(".selecionado").length;
+  console.log(numeroSelecionados);
+  const numeroBox = document.querySelectorAll(".quizz-box").length;
+
+  if (numeroSelecionados === numeroBox) {
+    respostasCertas();
+    for (let i = 0; i < quizz.levels.length; i++) {
+      if (pontuacao >= Number(quizz.levels[i].minValue)) {
+        tituloResultado = quizz.levels[i].title;
+        textoResultado = quizz.levels[i].text;
+        imagemResultado = quizz.levels[i].image;
+      }
+    }
+    finalQuizz.innerHTML = `
+          <div class="resultados">
+            <div class="quizz-box box${contador + 1}">
+              <h2>${pontuacao}% de acerto: ${tituloResultado}</h2>
+              <div class="imagemResultado">
+                <img src="${imagemResultado}" />
+                <h2>${textoResultado}</h2>
+              </div>
+            </div>
+          </div>
+          <button class="reiniciar" onclick="reiniciar()">
+            Reiniciar Quizz
+          </button>
+          <button class="voltar" onclick="voltar()">Voltar para home</button>
+        </div>
+    `;
   }
 }
 
@@ -109,6 +158,7 @@ function escolherResposta(el) {
   }
   el.classList.remove("naoSelecionado");
   el.classList.add("selecionado");
+  renderizarResposta();
   scrollNext();
 }
 
@@ -119,9 +169,31 @@ function scrollTop() {
 function scrollNext() {
   num++;
   const nextElement = document.querySelector(".box" + num).nextElementSibling;
+  console.log(nextElement);
   setTimeout(function () {
     nextElement.scrollIntoView({ behavior: "smooth", block: "center" });
   }, 2000);
+  if (nextElement === null) {
+    setTimeout(function () {
+      respostaFinal = document.querySelector(".resultados > .quizz-box");
+      respostaFinal.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 2000);
+  }
+}
+
+function reiniciar() {
+  scrollTop();
+  renderizarTela2();
+  num = 0;
+  finalQuizz.innerHTML = "";
+}
+
+function voltar() {
+  document.querySelector(".tela2").classList.add("esconder");
+  document.querySelector(".tela1").classList.remove("esconder");
+  scrollTop();
+  num = 0;
+  finalQuizz.innerHTML = "";
 }
 
 //Tela 3.1 JS
