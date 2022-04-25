@@ -10,7 +10,8 @@ let quizzObject = {
   title:tituloQuizz,
   image:url,
   questions:[],
-  levels:[]
+  levels:[],
+
 }
 
 let numPergunta;
@@ -22,6 +23,9 @@ let imagemResultado;
 let contador;
 num = 0;
 
+let ids = []
+let quizzesUsuario = []
+let lastQuizz = []
 //Tela 1 JS
 
 function listarTodosQuizzes() {
@@ -31,10 +35,9 @@ function listarTodosQuizzes() {
   promise.then(renderizarTodosQuizzes);
 }
 
-function renderizarTodosQuizzes(resposta) {
+function renderizarTodosQuizzes(resposta){
   let todosQuizzes = document.querySelector(".quizzes");
   objetosAPI = resposta.data;
-  console.log(objetosAPI);
   for (let i = 0; i < resposta.data.length; i++) {
     todosQuizzes.innerHTML += `<div class="quizz" onclick="abrirQuizz('${resposta.data[i].id}')">
         <img src="${resposta.data[i].image}">
@@ -55,9 +58,8 @@ chamarServidorQuizzes();
 
 function abrirQuizz(id) {
   quizz = objetosAPI.find((objeto) => objeto.id === Number(id));
-  console.log(quizz);
-  document.querySelector(".tela1").classList.add("esconder");
-  document.querySelector(".tela2").classList.remove("esconder");
+  document.querySelector(".container.tela1").classList.add("esconder");
+  document.querySelector(".container.tela2").classList.remove("esconder");
   renderizarTela2();
   scrollTop();
 }
@@ -418,7 +420,7 @@ function getNiveis(){
         title: document.querySelectorAll(".div-nivel")[i].querySelector(".inputs").querySelectorAll("input")[0].value,
         image: document.querySelectorAll(".div-nivel")[i].querySelector(".inputs").querySelectorAll("input")[2].value,
         text: document.querySelectorAll(".div-nivel")[i].querySelector(".inputs").querySelectorAll("input")[3].value,
-        minValue: document.querySelectorAll(".div-nivel")[i].querySelector(".inputs").querySelectorAll("input")[1].value
+        minValue: Number(document.querySelectorAll(".div-nivel")[i].querySelector(".inputs").querySelectorAll("input")[1].value)
       },
     )
   }
@@ -426,9 +428,19 @@ function getNiveis(){
 
 function finalizarQuizz(){
   getNiveis()
-  //let promise = axios.post('https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes',quizzObject)
-  //promise.then(renderizarTelaFinal)
-  renderizarTelaFinal()
+  let promise = axios.post('https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes',quizzObject)
+  promise.then(renderizarTelaFinal)
+  axios.get('https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes').then(getLastQuizz)
+  getQuizzUsuario()
+}
+
+function getLastQuizz(response){
+  lastQuizz.push(response.data[0]) 
+  ids.push(response.data[0].id)
+  console.log(ids)
+  const lastQuizzSerializado = JSON.stringify(lastQuizz)
+  localStorage.setItem('quizzUsuario',lastQuizzSerializado)
+  console.log(lastQuizz)
 }
 
 function renderizarTelaFinal(){
@@ -446,13 +458,36 @@ function renderizarTelaFinal(){
 }
 
 
-function acessarQuizz(){
-
-}
+function acessarQuizz(){}
 
 function voltarHome(){
-  document.location.reload(true)
+  document.querySelector(".tela3-4").classList.add("esconder")
+  document.querySelector(".tela1").classList.remove("esconder")
 }
+
+function getQuizzUsuario(){
+  let divUsuario = document.querySelector(".tela1 .filled .quizz-usuario")
+    if(ids != null ){
+    document.querySelector(".quizzes-usuario").classList.add('esconder')
+    document.querySelector(".filled").classList.remove("esconder")
+      divUsuario.innerHTML = ''
+      const quizzesUsuarioSerializado = localStorage.getItem('quizzUsuario') 
+      const quizzUsuario = JSON.parse(quizzesUsuarioSerializado)
+      for(let i = 0 ; i < quizzUsuario.length; i++){
+      divUsuario.innerHTML += `<div class="quizz" onclick="abrirQuizz('${quizzUsuario[i].id}')">
+      <img src="${quizzUsuario[i].image}">
+      <p class="titulo-quizz">${quizzUsuario[i].title}</p>
+      </div>`
+    }
+    console.log(quizzUsuario)
+  }
+}
+
+console.log(quizzesUsuario)
+
+
+
+
 
 
 

@@ -59,6 +59,8 @@ button {
   font-size: 20px;
 }
 
+
+
 .tela1 button {
   color: #ec362d;
   border-radius: 50px;
@@ -161,10 +163,13 @@ button {
   font-size: 20px;
   line-height: 22px;
   font-weight: 400;
-  display: flex;
-  align-items: center;
-  min-height: 54px;
   position: absolute;
+  max-width: 240px;
+  text-overflow: ellipsis;
+  overflow:hidden;
+  white-space:nowrap;
+  height:auto;
+  margin-bottom:10px;
 }
 /*Fim da tela 1*/
 
@@ -435,8 +440,10 @@ ion-icon{
 }
 
 
+
 .div-nivel.fechada .inputs > input{
   display:none;
+  color:#7eeb4c;
 }
 
 .div-nivel.fechada ion-icon{
@@ -450,13 +457,39 @@ ion-icon{
   margin-bottom:15px;
 }
 
-.tela3-4 p{
+.tela3-4 > p{
   color:#818181;
   font-size:21px;
   margin:20px 0px;
   cursor:pointer;
 }
 
+.filled{
+  height:190px;
+  width:1050px;
+  margin-bottom:70px;
+}
+
+.filled div{
+  display:flex;
+  align-items:center;
+}
+
+.filled button{
+  background-color:red;
+  color:white;
+  border-radius:500px;
+  width:30px;
+  height:30px;
+  margin-left: 10px;
+}
+
+
+
 .container.esconder {
   display: none;
+}
+
+.esconder{
+  display:none;
 }
