@@ -378,7 +378,7 @@ function criarNiveis(){
   renderizarNiveis()
 }
 
-//TELA 3.3 - CRIAR NÍVEIS - A CONSTRUIR
+//TELA 3.3 - CRIAR NÍVEIS
 function abrirNivel(icone){
   icone.parentNode.classList.remove("fechada")
   icone.remove()
@@ -434,14 +434,40 @@ function finalizarQuizz(){
   getQuizzUsuario()
 }
 
-function getLastQuizz(response){
-  lastQuizz.push(response.data[0]) 
-  ids.push(response.data[0].id)
-  console.log(ids)
-  const lastQuizzSerializado = JSON.stringify(lastQuizz)
-  localStorage.setItem('quizzUsuario',lastQuizzSerializado)
-  console.log(lastQuizz)
+
+function getQuizzUsuario(){
+  let divUsuario = document.querySelector(".tela1 .filled .quizz-usuario")
+    if(ids != null ){
+    document.querySelector(".quizzes-usuario").classList.add('esconder')
+    document.querySelector(".filled").classList.remove("esconder")
+      divUsuario.innerHTML = ''
+      const quizzesUsuarioSerializado = localStorage.getItem('quizzUsuario') 
+      const quizzUsuario = JSON.parse(quizzesUsuarioSerializado)
+      for(let i = 0 ; i < quizzUsuario.length; i++){
+      divUsuario.innerHTML += `<div class="quizz" onclick="abrirQuizz('${quizzUsuario[i].id}')">
+      <img src="${quizzUsuario[i].image}">
+      <p class="titulo-quizz">${quizzUsuario[i].title}</p>
+      </div>`
+    }
+    console.log(quizzUsuario)
+  }
 }
+
+let id;
+
+
+function getQuizzCriado(){
+  let promise = axios.get(`https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes/`)
+  promise.then(getID)
+}
+function getID(resposta){
+  id = resposta.data[0].id
+  console.log(id)
+  ids.push(id)
+ }
+
+
+getQuizzCriado()
 
 function renderizarTelaFinal(){
   document.querySelector(".tela3-3").classList.add("esconder")
@@ -465,25 +491,7 @@ function voltarHome(){
   document.querySelector(".tela1").classList.remove("esconder")
 }
 
-function getQuizzUsuario(){
-  let divUsuario = document.querySelector(".tela1 .filled .quizz-usuario")
-    if(ids != null ){
-    document.querySelector(".quizzes-usuario").classList.add('esconder')
-    document.querySelector(".filled").classList.remove("esconder")
-      divUsuario.innerHTML = ''
-      const quizzesUsuarioSerializado = localStorage.getItem('quizzUsuario') 
-      const quizzUsuario = JSON.parse(quizzesUsuarioSerializado)
-      for(let i = 0 ; i < quizzUsuario.length; i++){
-      divUsuario.innerHTML += `<div class="quizz" onclick="abrirQuizz('${quizzUsuario[i].id}')">
-      <img src="${quizzUsuario[i].image}">
-      <p class="titulo-quizz">${quizzUsuario[i].title}</p>
-      </div>`
-    }
-    console.log(quizzUsuario)
-  }
-}
 
-console.log(quizzesUsuario)
 
 
 
