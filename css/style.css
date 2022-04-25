@@ -28,56 +28,57 @@ button {
 }
 
 /*Tela 1*/
-.container{
-    max-width: 1050px;
-    height:auto;
-    margin: 55px auto;
-    font-family: "Roboto", "sans-serif";
-    margin-top: 120px;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-  }
-
-  .quizzes-usuario{
-    width:100%;
-    border:1px dashed #D5D5D5;
-    height:180px;
-    border-radius:5px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:space-around;
-    background-color:#FAFAFA;
-    margin-bottom:40px;
- }
-
- .quizzes-usuario p {
-    color: #b9b9b9;
-    font-size: 20px;
-  }
-
-  .tela1 button{
-    color: #EC362D;
-    border-radius:50px;
-    width:150px;
-    height:50px;
-    border: 1px dashed #EC362D;
-    background-color:#FAFAFA;
-    cursor:pointer;
-    font-size:21px;
-    font-weight:normal;
-   }
-
-   .tela1 button:hover {
-    background-color: rgba(240, 234, 234, 0.795);
-    transition: 0.6s;
-  }
+.container {
+  max-width: 1050px;
+  height: auto;
+  margin: 55px auto;
+  font-family: "Roboto", "sans-serif";
+  margin-top: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   
-.container h4{
-    font-weight:bold;
-    font-size:20px;
+}
+
+.quizzes-usuario {
+  width: 100%;
+  border: 1px dashed #d5d5d5;
+  height: 180px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #fafafa;
+  margin-bottom: 40px;
+}
+
+.quizzes-usuario p {
+  color: #b9b9b9;
+  font-size: 20px;
+}
+
+.tela1 button {
+  color: #ec362d;
+  border-radius: 50px;
+  width: 150px;
+  height: 50px;
+  border: 1px dashed #ec362d;
+  background-color: #fafafa;
+  cursor: pointer;
+  font-size: 21px;
+  font-weight: normal;
+}
+
+.tela1 button:hover {
+  background-color: rgba(240, 234, 234, 0.795);
+  transition: 0.6s;
+}
+
+.container h4 {
+  font-weight: bold;
+  font-size: 20px;
 }
 
 .quizzes-usuario {
@@ -167,10 +168,13 @@ button {
 }
 /*Fim da tela 1*/
 
-/* Página 2 CSS */
-.pagina-quizz {
+/* Tela 2 CSS */
+.tela2 {
   background-color: #fafafa;
   font-family: "Roboto", sans-serif;
+}
+
+.pagina-quizz {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -218,6 +222,7 @@ button {
   color: #ffffff;
   font-weight: bold;
   font-size: 23px;
+  padding: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -236,12 +241,75 @@ button {
   object-fit: cover;
   margin: 20px 0 10px 0;
 }
+
 .quizz-box > div > figure > figcaption {
   width: 320px;
   overflow-wrap: break-word;
   font-size: 20px;
   font-weight: bold;
-  color: #000000;
+}
+
+.naoSelecionado {
+  opacity: 0.3;
+}
+
+.selecionado {
+  opacity: 1;
+}
+
+.resposta-certa > figcaption {
+  color: #009c22;
+}
+
+.resposta-errada > figcaption {
+  color: #ff0b0b;
+}
+
+.final-quizz {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.imagemResultado {
+  display: flex;
+  margin-top: 20px;
+}
+
+.imagemResultado > img {
+  width: 364px;
+  height: 273px;
+  object-fit: cover;
+  margin-right: 20px;
+}
+
+.imagemResultado > h2 {
+  width: 300px;
+  height: 273px;
+  font-size: 19px;
+  color: #484848;
+  overflow-wrap: break-word;
+}
+
+.reiniciar {
+  width: 260px;
+  height: 52px;
+  background-color: #ec362d;
+  border-radius: 15px;
+  color: #fff5f4;
+  font-size: 21px;
+  margin: 5px 0;
+}
+
+.voltar {
+  width: 260px;
+  height: 52px;
+  background-color: #fafafa;
+  color: #818181;
+  font-size: 21px;
+  border: 1px solid #fafafa;
+  margin: 5px 0 50px 0;
 }
 /* Fim página 2 CSS */
 
@@ -265,14 +333,14 @@ button {
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
 }
 
-.container input{
-    width:546px;
-    height:46px;
-    border-radius:5px;
-    border: 1px solid #D1D1D1;
-    font-style:italic;
-    margin: 5px 0px;
-    padding-left:10px;
+.container input {
+  width: 546px;
+  height: 46px;
+  border-radius: 5px;
+  border: 1px solid #d1d1d1;
+  font-style: italic;
+  margin: 5px 0px;
+  padding-left: 10px;
 }
 
 .info-quizz .placeholder {
@@ -280,19 +348,19 @@ button {
   padding-left: 10px;
 }
 
-
-.tela3-1 button, .tela3-2 button{
-    background-color:#EC362D;
-    width: 368px;
-    height: 54px;
-    border-radius: 15px;
-    border:none;
-    font-size:21px;
-    color:#FFF5F4;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    margin-top:20px;
+.tela3-1 button,
+.tela3-2 button, .tela3-3 button, .tela3-4 button {
+  background-color: #ec362d;
+  width: 368px;
+  height: 54px;
+  border-radius: 15px;
+  border: none;
+  font-size: 21px;
+  color: #fff5f4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
 }
 
 /*Fim da Tela 3-1 */
@@ -345,10 +413,50 @@ ion-icon{
   top:18px;
 }
 
-.container.esconder{
-    display:none;
+/* Tela 3.3 - Criar níveis*/
+.div-nivel{
+  background: #FFFFFF;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+  display:flex;
+  flex-direction: column;
+  padding:20px;
+  width:590px;
+  margin: 15px 0px;
+  position:relative;
 }
 
-.esconder{
+.div-nivel h4{
+  margin: 10px 0px;
+}
+
+.div-nivel.fechada{
+  height:70px;
+  position:relative;
+}
+
+
+.div-nivel.fechada .inputs > input{
   display:none;
+}
+
+.div-nivel.fechada ion-icon{
+  position:absolute;
+  top:15px;
+  right:20px;
+}
+
+/*Tela 3.4 */
+.tela3-4 h4{
+  margin-bottom:15px;
+}
+
+.tela3-4 p{
+  color:#818181;
+  font-size:21px;
+  margin:20px 0px;
+  cursor:pointer;
+}
+
+.container.esconder {
+  display: none;
 }

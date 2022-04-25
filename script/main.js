@@ -7,11 +7,29 @@ let quizz = [];
 let inputs = []  
 
 let quizzObject = {
-  title: tituloQuizz,
+  title:tituloQuizz,
   image:url,
-  questions:[]
+  questions:[],
+  levels:[]
 }
 
+let numPergunta;
+let finalQuizz;
+let pontuacao;
+let tituloResultado;
+let textoResultado;
+let imagemResultado;
+let contador;
+num = 0;
+
+//Tela 1 JS
+
+function listarTodosQuizzes() {
+  let promise = axios.get(
+    "https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes"
+  );
+  promise.then(renderizarTodosQuizzes);
+}
 
 function renderizarTodosQuizzes(resposta) {
   let todosQuizzes = document.querySelector(".quizzes");
@@ -41,6 +59,7 @@ function abrirQuizz(id) {
   document.querySelector(".tela1").classList.add("esconder");
   document.querySelector(".tela2").classList.remove("esconder");
   renderizarTela2();
+  scrollTop();
 }
 
 function renderizarTela2() {
@@ -53,68 +72,177 @@ function renderizarTela2() {
     </div>
   `;
   for (let i = 0; i < quizz.questions.length; i++) {
+    contador = i + 1;
     paginaQuizz.innerHTML += `
-      <div class="quizz-box">
-        <h2 style="background-color:${quizz.questions[i].color} ;">${quizz.questions[i].title}</h2>
-      <div class="imagensQuizz"></div>
+      <div class="quizz-box box${contador}">
+        <h2 style="background-color:${quizz.questions[i].color};">${quizz.questions[i].title}</h2>
+      <div class="imagensQuizz pergunta${contador}"></div>
       </div>
     `;
+    let listaEmbaralhar = quizz.questions[i].answers;
+    listaEmbaralhar.sort(random);
+
     for (let j = 0; j < quizz.questions[i].answers.length; j++) {
       k = i + 2;
       imagensQuizz = document.querySelector(
         `.quizz-box:nth-child(${k}) > .imagensQuizz`
       );
       imagensQuizz.innerHTML += `
-        <figure>
-          <img src=${quizz.questions[i].answers[j].image} />
-          <figcaption>${quizz.questions[i].answers[j].text}</figcaption>
-        </figure>
+         <figure onclick="escolherResposta(this)">
+           <img src=${listaEmbaralhar[j].image} />
+           <div class="answer esconder">${listaEmbaralhar[j].isCorrectAnswer}</div>
+           <figcaption class="resposta-certa">${listaEmbaralhar[j].text}</figcaption>
+         </figure>
       `;
     }
   }
 }
 
-function criarQuizz(){
-    document.querySelector(".tela1").classList.add("esconder")
-    document.querySelector(".tela3-1").classList.remove("esconder")
+function respostasCertas() {
+  const acertos = document.querySelectorAll(
+    ".resposta-certa.selecionado"
+  ).length;
+  const erros = document.querySelectorAll(
+    ".resposta-errada.selecionado"
+  ).length;
+  pontuacao = Math.round((acertos / (acertos + erros)) * 100);
 }
 
+function renderizarResposta() {
+  finalQuizz = document.querySelector(".final-quizz");
+  const numeroSelecionados = document.querySelectorAll(".selecionado").length;
+  console.log(numeroSelecionados);
+  const numeroBox = document.querySelectorAll(".quizz-box").length;
+
+  if (numeroSelecionados === numeroBox) {
+    respostasCertas();
+    for (let i = 0; i < quizz.levels.length; i++) {
+      if (pontuacao >= Number(quizz.levels[i].minValue)) {
+        tituloResultado = quizz.levels[i].title;
+        textoResultado = quizz.levels[i].text;
+        imagemResultado = quizz.levels[i].image;
+      }
+    }
+    finalQuizz.innerHTML = `
+          <div class="resultados">
+            <div class="quizz-box box${contador + 1}">
+              <h2>${pontuacao}% de acerto: ${tituloResultado}</h2>
+              <div class="imagemResultado">
+                <img src="${imagemResultado}" />
+                <h2>${textoResultado}</h2>
+              </div>
+            </div>
+          </div>
+          <button class="reiniciar" onclick="reiniciar()">
+            Reiniciar Quizz
+          </button>
+          <button class="voltar" onclick="voltar()">Voltar para home</button>
+        </div>
+    `;
+  }
+}
+
+function random() {
+  return Math.random() - 0.5;
+}
+
+function escolherResposta(el) {
+  const parent = el.parentNode;
+  for (let i = 0; i < parent.children.length; i++) {
+    parent.children[i].classList.add("naoSelecionado");
+    parent.children[i].removeAttribute("onclick");
+    console.log(
+      parent.querySelector(`figure:nth-child(${i + 1}) > div`).innerHTML
+    );
+    const ehCorreto = parent.querySelector(
+      `figure:nth-child(${i + 1}) > div`
+    ).innerHTML;
+    if (ehCorreto == "true") {
+      parent.children[i].classList.add("resposta-certa");
+    } else {
+      parent.children[i].classList.add("resposta-errada");
+    }
+  }
+  el.classList.remove("naoSelecionado");
+  el.classList.add("selecionado");
+  renderizarResposta();
+  scrollNext();
+}
+
+function scrollTop() {
+  window.scrollTo(0, 0);
+}
+
+function scrollNext() {
+  num++;
+  const nextElement = document.querySelector(".box" + num).nextElementSibling;
+  console.log(nextElement);
+  setTimeout(function () {
+    nextElement.scrollIntoView({ behavior: "smooth", block: "center" });
+  }, 2000);
+  if (nextElement === null) {
+    setTimeout(function () {
+      respostaFinal = document.querySelector(".resultados > .quizz-box");
+      respostaFinal.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 2000);
+  }
+}
+
+function reiniciar() {
+  scrollTop();
+  renderizarTela2();
+  num = 0;
+  finalQuizz.innerHTML = "";
+}
+
+function voltar() {
+  document.querySelector(".tela2").classList.add("esconder");
+  document.querySelector(".tela1").classList.remove("esconder");
+  scrollTop();
+  num = 0;
+  finalQuizz.innerHTML = "";
+}
+
+//INÍCIO DA TELA 3 ( CRIAR QUIZZES)
+function criarQuizz(){
+  document.querySelector(".tela1").classList.add("esconder")
+  document.querySelector(".container.tela3-1").classList.remove("esconder")
+}
+
+//TELA 3.1 (INFORMAÇÕES BÁSICAS DO QUIZZ)
 let pattern = /^https:\/\//i;
 
+function validarInformaçõesQuizz(){
+tituloQuizz = document.querySelector(".tituloQuizz").value
+url = document.querySelector(".infos-quizz").querySelector(".URLImagem").value
+quantidadePerguntas = Number(document.querySelector(".QuantidadePerguntas").value)
+quantidadeNiveis = Number(document.querySelector(".QuantidadeNíveis").value)
+}
+
+/*
 function validarInformaçõesQuizz(){
   tituloQuizz = document.querySelector(".tituloQuizz").value
   url = document.querySelector(".infos-quizz").querySelector(".URLImagem").value
   quantidadePerguntas = Number(document.querySelector(".QuantidadePerguntas").value)
   quantidadeNiveis = Number(document.querySelector(".QuantidadeNíveis").value)
-  return true
-}
-
-/*
-function validarInformaçõesQuizz(){
-    tituloQuizz = document.querySelector(".tituloQuizz").value
-    url = document.querySelector(".infos-quizz").querySelector(".URLImagem").value
-    quantidadePerguntas = Number(document.querySelector(".QuantidadePerguntas").value)
-    quantidadeNiveis = Number(document.querySelector(".QuantidadeNíveis").value)
-    
-    if(pattern.test(url) && (!isNaN(quantidadePerguntas) && !isNaN(quantidadeNiveis)) && tituloQuizz.length > 20 && tituloQuizz.length < 65 && quantidadePerguntas >=3 && quantidadeNiveis >=2){
-        return true
-    }else{
-      alert("Dados inválidos")
-        return false
-    }
-}
-
-*/
-function prosseguir(){
-  if(validarInformaçõesQuizz()){
-    document.querySelector(".container.tela3-1").classList.add("esconder")
-    document.querySelector(".container.tela3-2").classList.remove("esconder")
-    gerarQuantidadePerguntas()
+  
+  if(pattern.test(url) && (!isNaN(quantidadePerguntas) && !isNaN(quantidadeNiveis)) && tituloQuizz.length > 20 && tituloQuizz.length < 65 && quantidadePerguntas >=3 && quantidadeNiveis >=2){
+      return true
+  }else{
+    alert("Dados inválidos")
+      return false
   }
-  console.log(tituloQuizz, tituloQuizz.length)
+}
+*/
+
+function prosseguir(){
+  document.querySelector(".container.tela3-1").classList.add("esconder")
+  document.querySelector(".container.tela3-2").classList.remove("esconder")
+  validarInformaçõesQuizz()
+  gerarQuantidadePerguntas()
 }
 
-
+//TELA 3.2 (CRIAR AS PERGUNTAS)
 function gerarQuantidadePerguntas(){
 //3. 1, 2 e 3
   let containerPerguntas = document.querySelector(".perguntas")
@@ -193,14 +321,9 @@ function abrirPergunta(icone){
   icone.remove()
 }
 
-  function getInputs()
+function getInputs()
   {
-
-    quizzObject = {
-      title: tituloQuizz,
-      image:url,
-      questions:[]
-    }
+    quizzObject.questions = []
     let inputText;
       for(let i = 0; i < quantidadePerguntas; i++)
       {  
@@ -235,19 +358,101 @@ function abrirPergunta(icone){
             ] 
           },
         )
+
+        /*
       if(inputText[0].value.length < 20 || inputText[1].value.length < 6 || !inputText[1].value.startsWith("#") || (inputText[2].value == "" || inputText[4].value == "" || inputText[6].value == "" || inputText[8].value == "")) {
         return false
       }else{
         return true
-      }    
+      } */   
       }//final do for 
+    
     }
  
 function criarNiveis(){
-  if(getInputs () == false){
-    alert("Dados inválidos")
-  }else{
-    document.querySelector(".tela3-2").classList.add("esconder")
-    document.querySelector(".tela3-3").classList.remove("esconder")
+  document.querySelector(".tela3-2").classList.add("esconder")
+  document.querySelector(".tela3-3").classList.remove("esconder")
+  getInputs()
+  renderizarNiveis()
+}
+
+//TELA 3.3 - CRIAR NÍVEIS - A CONSTRUIR
+function abrirNivel(icone){
+  icone.parentNode.classList.remove("fechada")
+  icone.remove()
+}
+
+function renderizarNiveis(){
+  let divNivel = document.querySelector(".niveis")
+  divNivel.innerHTML += 
+    `<div class="div-nivel">
+      <h4>Nível 1</h4>
+      <div class="inputs">
+        <input placeholder="Título do nível" type="text" class="tituloNivel">
+        <input placeholder="% de acerto mínima" type="text" class="porcentagemAcerto">
+        <input placeholder="URL da imagem do nível" type="text" class="URLImagem">
+        <input placeholder="Descrição do nível" type="text">
+      </div> 
+    </div>`
+  for(let i = 1+1 ; i <= quantidadeNiveis; i++){
+    divNivel.innerHTML += `<div class="div-nivel fechada">
+    <h4>Nível ${i}</h4>
+    <ion-icon name="open-outline" onclick="abrirNivel(this)"></ion-icon>
+    <div class="inputs">
+      <input placeholder="Título do nível" type="text" class="tituloNivel">
+      <input placeholder="% de acerto mínima" type="text" class="porcentagemAcerto">
+      <input placeholder="URL da imagem do nível" type="text" class="URLImagem">
+      <input placeholder="Descrição do nível" type="text">
+    </div>
+  </div>`
   }
 }
+
+function getNiveis(){
+  for(let i = 0 ; i < quantidadeNiveis; i++){
+      quizzObject.title = tituloQuizz
+      quizzObject.image = url
+
+    quizzObject.levels.push(
+      {
+        title: document.querySelectorAll(".div-nivel")[i].querySelector(".inputs").querySelectorAll("input")[0].value,
+        image: document.querySelectorAll(".div-nivel")[i].querySelector(".inputs").querySelectorAll("input")[2].value,
+        text: document.querySelectorAll(".div-nivel")[i].querySelector(".inputs").querySelectorAll("input")[3].value,
+        minValue: document.querySelectorAll(".div-nivel")[i].querySelector(".inputs").querySelectorAll("input")[1].value
+      },
+    )
+  }
+}
+
+function finalizarQuizz(){
+  getNiveis()
+  //let promise = axios.post('https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes',quizzObject)
+  //promise.then(renderizarTelaFinal)
+  renderizarTelaFinal()
+}
+
+function renderizarTelaFinal(){
+  document.querySelector(".tela3-3").classList.add("esconder")
+  document.querySelector(".tela3-4").classList.remove("esconder")
+  let divRender = document.querySelector(".tela3-4")
+  divRender.innerHTML += `
+  <h4>Seu quizz está pronto!</h4>
+  <div class="quizz">
+    <img src="${url}">
+    <p class="titulo-quizz">${quizzObject.title}</p>
+  </div>
+  <button onclick="acessarQuizz()">Acessar Quizz</button>
+  <p  onclick="voltarHome()">Voltar pra home</p>`
+}
+
+
+function acessarQuizz(){
+
+}
+
+function voltarHome(){
+  document.location.reload(true)
+}
+
+
+

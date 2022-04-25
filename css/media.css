@@ -17,7 +17,7 @@
   }
   .quizz-box {
     width: 375px;
-    height: 436px;
+    height: auto;
     padding: 18px;
   }
 
@@ -34,5 +34,35 @@
   .quizz-box > div > figure > figcaption {
     font-size: 13px;
     width: 163px;
+  }
+
+  .imagemResultado {
+    flex-direction: column;
+    margin-top: 10px;
+  }
+
+  .imagemResultado > img {
+    width: 100%;
+    height: auto;
+    margin-right: 0px;
+    margin-bottom: 10px;
+  }
+
+  .imagemResultado > h2 {
+    width: 100%;
+    height: auto;
+    font-size: 17px;
+  }
+
+  .reiniciar {
+    width: 220px;
+    height: 44px;
+    font-size: 18px;
+  }
+
+  .voltar {
+    width: 220px;
+    height: 44px;
+    font-size: 18px;
   }
 }
