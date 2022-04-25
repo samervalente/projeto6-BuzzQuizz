@@ -453,7 +453,7 @@ function getQuizzUsuario(){
   }
 }
 
-let id;
+
 
 
 function getQuizzCriado(){
@@ -461,9 +461,15 @@ function getQuizzCriado(){
   promise.then(getID)
 }
 function getID(resposta){
-  id = resposta.data[0].id
+  let id = resposta.data[0].id
   console.log(id)
-  ids.push(id)
+    ids.length ++
+    for(let i = 0 ; i < ids.length ; i ++){
+        if(id != resposta.data[0].id){
+          ids.push(id)
+        }
+    }
+  console.log(ids)
  }
 
 
