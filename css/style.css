@@ -58,13 +58,6 @@ button {
   font-size: 20px;
 }
 
-.quizzes {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
-
 .tela1 button {
   color: #ec362d;
   border-radius: 50px;
@@ -127,10 +120,13 @@ button {
   font-size: 20px;
   line-height: 22px;
   font-weight: 400;
-  display: flex;
-  align-items: center;
-  min-height: 54px;
   position: absolute;
+  max-width: 240px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  height: auto;
+  margin-bottom: 10px;
 }
 /*Fim da tela 1*/
 
@@ -151,8 +147,11 @@ button {
   width: 100%;
   height: 227px;
   object-fit: cover;
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-    url("../src/images/Rectangle\ 34.png");
+  -webkit-mask-image: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.6),
+    rgba(0, 0, 0, 0.6)
+  );
 }
 
 .pagina-quizz .imagem-superior {
@@ -160,6 +159,7 @@ button {
   width: 100%;
   height: auto;
   margin-top: 69px;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
 }
 
 .pagina-quizz .imagem-superior > h1 {
@@ -403,6 +403,7 @@ ion-icon {
 
 .div-nivel.fechada .inputs > input {
   display: none;
+  color: #7eeb4c;
 }
 
 .div-nivel.fechada ion-icon {
@@ -416,11 +417,31 @@ ion-icon {
   margin-bottom: 15px;
 }
 
-.tela3-4 p {
+.tela3-4 > p {
   color: #818181;
   font-size: 21px;
   margin: 20px 0px;
   cursor: pointer;
+}
+
+.filled {
+  height: 190px;
+  width: 1050px;
+  margin-bottom: 70px;
+}
+
+.filled div {
+  display: flex;
+  align-items: center;
+}
+
+.filled button {
+  background-color: red;
+  color: white;
+  border-radius: 500px;
+  width: 30px;
+  height: 30px;
+  margin-left: 10px;
 }
 
 .container.esconder {

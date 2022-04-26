@@ -1,10 +1,17 @@
-@media (max-width: 390px) {
+@media (max-width: 1100px) {
   .container {
     margin: 30px 15px;
   }
 
   .quizzes-todos .quizz:last-child {
     margin-bottom: 70px;
+  }
+
+  .quizzes {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
   }
 }
 

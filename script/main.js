@@ -4,14 +4,14 @@ let url;
 let tituloQuizz;
 let objetosAPI = [];
 let quizz = [];
-let inputs = []  
+let inputs = [];
 
 let quizzObject = {
-  title:tituloQuizz,
-  image:url,
-  questions:[],
-  levels:[]
-}
+  title: tituloQuizz,
+  image: url,
+  questions: [],
+  levels: [],
+};
 
 let numPergunta;
 let finalQuizz;
@@ -21,7 +21,11 @@ let textoResultado;
 let imagemResultado;
 let contador;
 num = 0;
+let quizzUsuario = [];
 
+let ids = [];
+let quizzesUsuario = [];
+let lastQuizz = [];
 //Tela 1 JS
 
 function listarTodosQuizzes() {
@@ -46,17 +50,21 @@ function renderizarTodosQuizzes(resposta) {
   }
 }
 
-function chamarServidorQuizzes(){
-  let promise = axios.get('https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes')
-  promise.then(renderizarTodosQuizzes)
+function chamarServidorQuizzes() {
+  let promise = axios.get(
+    "https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes"
+  );
+  promise.then(renderizarTodosQuizzes);
 }
 
 chamarServidorQuizzes();
 
+//Tela2 JS
 function abrirQuizz(id) {
   quizz = objetosAPI.find((objeto) => objeto.id === Number(id));
   console.log(quizz);
   document.querySelector(".tela1").classList.add("esconder");
+  document.querySelector(".tela3-4").classList.add("esconder");
   document.querySelector(".tela2").classList.remove("esconder");
   renderizarTela2();
   scrollTop();
@@ -204,19 +212,23 @@ function voltar() {
 }
 
 //INÍCIO DA TELA 3 ( CRIAR QUIZZES)
-function criarQuizz(){
-  document.querySelector(".tela1").classList.add("esconder")
-  document.querySelector(".container.tela3-1").classList.remove("esconder")
+function criarQuizz() {
+  document.querySelector(".tela1").classList.add("esconder");
+  document.querySelector(".tela3-1").classList.remove("esconder");
 }
 
 //TELA 3.1 (INFORMAÇÕES BÁSICAS DO QUIZZ)
 let pattern = /^https:\/\//i;
 
-function validarInformaçõesQuizz(){
-tituloQuizz = document.querySelector(".tituloQuizz").value
-url = document.querySelector(".infos-quizz").querySelector(".URLImagem").value
-quantidadePerguntas = Number(document.querySelector(".QuantidadePerguntas").value)
-quantidadeNiveis = Number(document.querySelector(".QuantidadeNíveis").value)
+function validarInformaçõesQuizz() {
+  tituloQuizz = document.querySelector(".tituloQuizz").value;
+  url = document
+    .querySelector(".infos-quizz")
+    .querySelector(".URLImagem").value;
+  quantidadePerguntas = Number(
+    document.querySelector(".QuantidadePerguntas").value
+  );
+  quantidadeNiveis = Number(document.querySelector(".QuantidadeNíveis").value);
 }
 
 /*
@@ -235,17 +247,17 @@ function validarInformaçõesQuizz(){
 }
 */
 
-function prosseguir(){
-  document.querySelector(".container.tela3-1").classList.add("esconder")
-  document.querySelector(".container.tela3-2").classList.remove("esconder")
-  validarInformaçõesQuizz()
-  gerarQuantidadePerguntas()
+function prosseguir() {
+  document.querySelector(".container.tela3-1").classList.add("esconder");
+  document.querySelector(".container.tela3-2").classList.remove("esconder");
+  validarInformaçõesQuizz();
+  gerarQuantidadePerguntas();
 }
 
 //TELA 3.2 (CRIAR AS PERGUNTAS)
-function gerarQuantidadePerguntas(){
-//3. 1, 2 e 3
-  let containerPerguntas = document.querySelector(".perguntas")
+function gerarQuantidadePerguntas() {
+  //3. 1, 2 e 3
+  let containerPerguntas = document.querySelector(".perguntas");
   containerPerguntas.innerHTML += `
   <div class="div-pergunta">
     <h4 class="numPergunta">Pergunta 1</h4>
@@ -277,9 +289,9 @@ function gerarQuantidadePerguntas(){
        </div>
      </div>
     </div>   
-  `
+  `;
 
-  for(let i = 1+1 ; i <= quantidadePerguntas; i++){
+  for (let i = 1 + 1; i <= quantidadePerguntas; i++) {
     containerPerguntas.innerHTML += `   <div class="div-pergunta fechada">
     <h4 class="numPergunta">Pergunta ${i}</h4>
     <ion-icon name="open-outline" onclick="abrirPergunta(this)"></ion-icon>
@@ -312,80 +324,105 @@ function gerarQuantidadePerguntas(){
        </div>
      </div>
     </div> 
- </div>`
+ </div>`;
   }
 }
 
-function abrirPergunta(icone){
-  icone.parentNode.classList.remove("fechada")
-  icone.remove()
+function abrirPergunta(icone) {
+  icone.parentNode.classList.remove("fechada");
+  icone.remove();
 }
 
-function getInputs()
-  {
-    quizzObject.questions = []
-    let inputText;
-      for(let i = 0; i < quantidadePerguntas; i++)
-      {  
-        inputText = document.querySelectorAll(".div-pergunta")[i].querySelector(".infos").querySelectorAll("input")
-        quizzObject.questions.push
-        (
-          {
-            title: document.querySelectorAll(".div-pergunta")[i].querySelector(".infos").querySelectorAll("input")[0].value,
-            color: document.querySelectorAll(".div-pergunta")[i].querySelector(".infos").querySelectorAll("input")[1].value,
-            answers: 
-            [
-              {
-                text: document.querySelectorAll(".div-pergunta")[i].querySelector(".infos").querySelectorAll("input")[2].value,
-                image: document.querySelectorAll(".div-pergunta")[i].querySelector(".infos").querySelectorAll("input")[3].value,
-                isCorrectAnswer: true
-              },
-              {
-                text: document.querySelectorAll(".div-pergunta")[i].querySelector(".infos").querySelectorAll("input")[4].value,
-                image: document.querySelectorAll(".div-pergunta")[i].querySelector(".infos").querySelectorAll("input")[5].value,
-                isCorrectAnswer: false
-              },
-              {
-                text: document.querySelectorAll(".div-pergunta")[i].querySelector(".infos").querySelectorAll("input")[6].value,
-                image: document.querySelectorAll(".div-pergunta")[i].querySelector(".infos").querySelectorAll("input")[7].value,
-                isCorrectAnswer: false
-              },
-              {
-                text: document.querySelectorAll(".div-pergunta")[i].querySelector(".infos").querySelectorAll("input")[8].value,
-                image: document.querySelectorAll(".div-pergunta")[i].querySelector(".infos").querySelectorAll("input")[9].value,
-                isCorrectAnswer: false
-              }
-            ] 
-          },
-        )
+function getInputs() {
+  quizzObject.questions = [];
+  let inputText;
+  for (let i = 0; i < quantidadePerguntas; i++) {
+    inputText = document
+      .querySelectorAll(".div-pergunta")
+      [i].querySelector(".infos")
+      .querySelectorAll("input");
+    quizzObject.questions.push({
+      title: document
+        .querySelectorAll(".div-pergunta")
+        [i].querySelector(".infos")
+        .querySelectorAll("input")[0].value,
+      color: document
+        .querySelectorAll(".div-pergunta")
+        [i].querySelector(".infos")
+        .querySelectorAll("input")[1].value,
+      answers: [
+        {
+          text: document
+            .querySelectorAll(".div-pergunta")
+            [i].querySelector(".infos")
+            .querySelectorAll("input")[2].value,
+          image: document
+            .querySelectorAll(".div-pergunta")
+            [i].querySelector(".infos")
+            .querySelectorAll("input")[3].value,
+          isCorrectAnswer: true,
+        },
+        {
+          text: document
+            .querySelectorAll(".div-pergunta")
+            [i].querySelector(".infos")
+            .querySelectorAll("input")[4].value,
+          image: document
+            .querySelectorAll(".div-pergunta")
+            [i].querySelector(".infos")
+            .querySelectorAll("input")[5].value,
+          isCorrectAnswer: false,
+        },
+        {
+          text: document
+            .querySelectorAll(".div-pergunta")
+            [i].querySelector(".infos")
+            .querySelectorAll("input")[6].value,
+          image: document
+            .querySelectorAll(".div-pergunta")
+            [i].querySelector(".infos")
+            .querySelectorAll("input")[7].value,
+          isCorrectAnswer: false,
+        },
+        {
+          text: document
+            .querySelectorAll(".div-pergunta")
+            [i].querySelector(".infos")
+            .querySelectorAll("input")[8].value,
+          image: document
+            .querySelectorAll(".div-pergunta")
+            [i].querySelector(".infos")
+            .querySelectorAll("input")[9].value,
+          isCorrectAnswer: false,
+        },
+      ],
+    });
 
-        /*
+    /*
       if(inputText[0].value.length < 20 || inputText[1].value.length < 6 || !inputText[1].value.startsWith("#") || (inputText[2].value == "" || inputText[4].value == "" || inputText[6].value == "" || inputText[8].value == "")) {
         return false
       }else{
         return true
-      } */   
-      }//final do for 
-    
-    }
- 
-function criarNiveis(){
-  document.querySelector(".tela3-2").classList.add("esconder")
-  document.querySelector(".tela3-3").classList.remove("esconder")
-  getInputs()
-  renderizarNiveis()
+      } */
+  } //final do for
 }
 
-//TELA 3.3 - CRIAR NÍVEIS - A CONSTRUIR
-function abrirNivel(icone){
-  icone.parentNode.classList.remove("fechada")
-  icone.remove()
+function criarNiveis() {
+  document.querySelector(".tela3-2").classList.add("esconder");
+  document.querySelector(".tela3-3").classList.remove("esconder");
+  getInputs();
+  renderizarNiveis();
 }
 
-function renderizarNiveis(){
-  let divNivel = document.querySelector(".niveis")
-  divNivel.innerHTML += 
-    `<div class="div-nivel">
+//TELA 3.3 - CRIAR NÍVEIS
+function abrirNivel(icone) {
+  icone.parentNode.classList.remove("fechada");
+  icone.remove();
+}
+
+function renderizarNiveis() {
+  let divNivel = document.querySelector(".niveis");
+  divNivel.innerHTML += `<div class="div-nivel">
       <h4>Nível 1</h4>
       <div class="inputs">
         <input placeholder="Título do nível" type="text" class="tituloNivel">
@@ -393,8 +430,8 @@ function renderizarNiveis(){
         <input placeholder="URL da imagem do nível" type="text" class="URLImagem">
         <input placeholder="Descrição do nível" type="text">
       </div> 
-    </div>`
-  for(let i = 1+1 ; i <= quantidadeNiveis; i++){
+    </div>`;
+  for (let i = 1 + 1; i <= quantidadeNiveis; i++) {
     divNivel.innerHTML += `<div class="div-nivel fechada">
     <h4>Nível ${i}</h4>
     <ion-icon name="open-outline" onclick="abrirNivel(this)"></ion-icon>
@@ -404,55 +441,114 @@ function renderizarNiveis(){
       <input placeholder="URL da imagem do nível" type="text" class="URLImagem">
       <input placeholder="Descrição do nível" type="text">
     </div>
-  </div>`
+  </div>`;
   }
 }
 
-function getNiveis(){
-  for(let i = 0 ; i < quantidadeNiveis; i++){
-      quizzObject.title = tituloQuizz
-      quizzObject.image = url
+function getNiveis() {
+  for (let i = 0; i < quantidadeNiveis; i++) {
+    quizzObject.title = tituloQuizz;
+    quizzObject.image = url;
 
-    quizzObject.levels.push(
-      {
-        title: document.querySelectorAll(".div-nivel")[i].querySelector(".inputs").querySelectorAll("input")[0].value,
-        image: document.querySelectorAll(".div-nivel")[i].querySelector(".inputs").querySelectorAll("input")[2].value,
-        text: document.querySelectorAll(".div-nivel")[i].querySelector(".inputs").querySelectorAll("input")[3].value,
-        minValue: document.querySelectorAll(".div-nivel")[i].querySelector(".inputs").querySelectorAll("input")[1].value
-      },
-    )
+    quizzObject.levels.push({
+      title: document
+        .querySelectorAll(".div-nivel")
+        [i].querySelector(".inputs")
+        .querySelectorAll("input")[0].value,
+      image: document
+        .querySelectorAll(".div-nivel")
+        [i].querySelector(".inputs")
+        .querySelectorAll("input")[2].value,
+      text: document
+        .querySelectorAll(".div-nivel")
+        [i].querySelector(".inputs")
+        .querySelectorAll("input")[3].value,
+      minValue: Number(
+        document
+          .querySelectorAll(".div-nivel")
+          [i].querySelector(".inputs")
+          .querySelectorAll("input")[1].value
+      ),
+    });
   }
 }
 
-function finalizarQuizz(){
-  getNiveis()
-  //let promise = axios.post('https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes',quizzObject)
-  //promise.then(renderizarTelaFinal)
-  renderizarTelaFinal()
+function finalizarQuizz() {
+  document.querySelector(".tela3-3").classList.add("esconder");
+  document.querySelector(".tela3-4").classList.remove("esconder");
+  getNiveis();
+  let promise = axios.post(
+    "https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes",
+    quizzObject
+  );
+  promise.then(getNew);
 }
 
-function renderizarTelaFinal(){
-  document.querySelector(".tela3-3").classList.add("esconder")
-  document.querySelector(".tela3-4").classList.remove("esconder")
-  let divRender = document.querySelector(".tela3-4")
-  divRender.innerHTML += `
+function getNew() {
+  axios
+    .get("https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes")
+    .then(getLastQuizz);
+  axios
+    .get("https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes")
+    .then(obterDeNovo);
+}
+
+function obterDeNovo(resposta) {
+  objetosAPI = resposta.data;
+  console.log(objetosAPI);
+}
+
+function getLastQuizz(response) {
+  lastQuizz.push(response.data[0]);
+  const lastQuizzSerializado = JSON.stringify(lastQuizz);
+  localStorage.setItem("quizzUsuario", lastQuizzSerializado);
+  console.log(lastQuizz);
+  renderizarTelaFinal();
+  getQuizzUsuario();
+}
+
+const divUsuario = document.querySelector(".tela1 .filled .quizz-usuario");
+
+function getQuizzUsuario() {
+  const quizzesUsuarioSerializado = localStorage.getItem("quizzUsuario");
+  quizzUsuario = JSON.parse(quizzesUsuarioSerializado);
+  console.log(quizzUsuario);
+  if (quizzUsuario.length != 0) {
+    document.querySelector(".quizzes-usuario").classList.add("esconder");
+    document.querySelector(".filled").classList.remove("esconder");
+    divUsuario.innerHTML = "";
+    renderizarQuizzUsuario();
+  }
+}
+
+function renderizarQuizzUsuario() {
+  for (let i = 0; i < quizzUsuario.length; i++) {
+    divUsuario.innerHTML += `<div class="quizz" onclick="abrirQuizz('${quizzUsuario[i].id}')">
+    <img src="${quizzUsuario[i].image}">
+    <p class="titulo-quizz">${quizzUsuario[i].title}</p>
+    </div>`;
+  }
+}
+
+function renderizarTelaFinal() {
+  // document.querySelector(".tela3-3").classList.add("esconder");
+  // document.querySelector(".tela3-4").classList.remove("esconder");
+  let divRender = document.querySelector(".tela3-4");
+  console.log(lastQuizz);
+  divRender.innerHTML = "";
+  divRender.innerHTML = `
   <h4>Seu quizz está pronto!</h4>
-  <div class="quizz">
-    <img src="${url}">
-    <p class="titulo-quizz">${quizzObject.title}</p>
+  <div class="quizz" onclick="abrirQuizz('${lastQuizz.at(-1).id}')">
+    <img src="${lastQuizz.at(-1).image}">
+    <p class="titulo-quizz">${lastQuizz.at(-1).title}</p>
   </div>
-  <button onclick="acessarQuizz()">Acessar Quizz</button>
-  <p  onclick="voltarHome()">Voltar pra home</p>`
+  <button onclick="abrirQuizz('${lastQuizz.at(-1).id}')">Acessar Quizz</button>
+  <p  onclick="voltarHome()">Voltar pra home</p>`;
 }
 
+function acessarQuizz() {}
 
-function acessarQuizz(){
-
+function voltarHome() {
+  document.querySelector(".tela3-4").classList.add("esconder");
+  document.querySelector(".tela1").classList.remove("esconder");
 }
-
-function voltarHome(){
-  document.location.reload(true)
-}
-
-
-
