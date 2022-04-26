@@ -1,0 +1,58 @@
+meu Quizz
+Titulo Quizz:
+O quanto você sabe sobre LoL?
+
+URL da imagem do quizz:
+https://s2.glbimg.com/QAsMIQRBbN4i-SNHSAfLpx7yGbM=/1200x/smart/filters:cover():strip_icc()/i.s3.glbimg.com/v1/AUTH_bc8228b6673f488aa253bbcb03c80ec5/internal_photos/bs/2020/t/M/AAPho9QJq3JVgp5BL7ow/league-of-legends-logo.jpg
+
+Quantidade de perguntas: 3
+Quantidade de níveis: 2
+
+Pergunta 1:
+Quando League of Legends foi lançado?
+2011
+https://www.google.com/url?sa=i&url=https%3A%2F%2Fbestswimming.swimchannel.net%2F2020%2F12%2F31%2Fretrospectiva-aquatica-da-decada-2011-2020%2Ftop-stories-of-2011-year-in-review1%2F&psig=AOvVaw1f9_dBwXGIbODvUqDyIhwE&ust=1650933950022000&source=images&cd=vfe&ved=0CAwQjRxqFwoTCNi34K7-rfcCFQAAAAAdAAAAABAD
+
+2009
+https://www.google.com/url?sa=i&url=https%3A%2F%2Fpt.dreamstime.com%2Ffoto-de-stock-royalty-free-2009-est%25C3%25A3o-pr%25C3%25B3ximo-image7066805&psig=AOvVaw3Z6O_rYt6qRXW3naqjj8tY&ust=1650933904174000&source=images&cd=vfe&ved=0CAwQjRxqFwoTCLjz15n-rfcCFQAAAAAdAAAAABAD
+
+2012
+https://www.google.com/url?sa=i&url=https%3A%2F%2Fbestswimming.swimchannel.net%2F2020%2F12%2F31%2Fretrospectiva-aquatica-da-decada-2011-2020%2Fyear-2012%2F&psig=AOvVaw1ObsNB9OOOn8Q9DniURCAA&ust=1650933918843000&source=images&cd=vfe&ved=0CAwQjRxqFwoTCNi736D-rfcCFQAAAAAdAAAAABAD
+
+2010
+https://www.google.com/url?sa=i&url=http%3A%2F%2Fthomasvconti.com.br%2F2020%2Fpor-que-os-anos-2010-foram-a-melhor-decada-da-humanidade-ate-agora%2F&psig=AOvVaw0G0-RqSC7fDx9shZsTmykQ&ust=1650933862217000&source=images&cd=vfe&ved=0CAwQjRxqFwoTCLCEroX-rfcCFQAAAAAdAAAAABAD
+
+Pergunta 2:
+Qual deste campeão é irmão/irmã da Lux?
+Lulu
+https://www.google.com/url?sa=i&url=https%3A%2F%2Funiverse.leagueoflegends.com%2Fpt_BR%2Fchampion%2Flulu%2F&psig=AOvVaw3VkWNA53r49rxeiD8Ilt31&ust=1650933985145000&source=images&cd=vfe&ved=0CAwQjRxqFwoTCOjli8D-rfcCFQAAAAAdAAAAABAD
+
+Jhin
+https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.theenemy.com.br%2Fleague-legends%2Fleague-of-legends%2Fleague-of-legends-conheca-o-novo-campeao-jhin-o-virtuoso&psig=AOvVaw2rbXds7VpPGCudb7i2mMV8&ust=1650934002267000&source=images&cd=vfe&ved=0CAwQjRxqFwoTCJDDlsj-rfcCFQAAAAAdAAAAABADKin
+
+Garen
+https://www.google.com/url?sa=i&url=https%3A%2F%2Fleagueoflegends.fandom.com%2Fpt-br%2Fwiki%2FGaren%2FHist%25C3%25B3ria&psig=AOvVaw070u_afmEDrxo6v7cRppYg&ust=1650934388070000&source=images&cd=vfe&ved=0CAwQjRxqFwoTCNjY0___rfcCFQAAAAAdAAAAABAD
+
+Darius
+https://www.google.com/imgres?imgurl=https%3A%2F%2Fimages.contentstack.io%2Fv3%2Fassets%2Fblt187521ff0727be24%2Fbltf982b9e4117d5cc2%2F60ee0c7d33819c6236259c0f%2FDarius_0.jpg&imgrefurl=https%3A%2F%2Funiverse.leagueoflegends.com%2Fpt_BR%2Fchampion%2Fdarius%2F&tbnid=cIg-yAKdNZx4QM&vet=12ahUKEwjXxemGgK73AhUVDbkGHSkXAcwQMygAegUIARC7AQ..i&docid=S0B6vjMSixOI_M&w=1215&h=717&q=Darius&hl=pt-BR&ved=2ahUKEwjXxemGgK73AhUVDbkGHSkXAcwQMygAegUIARC7AQ
+
+Pergunta 3:
+Qual deste campeão está na série arcane?
+Kindred
+https://www.google.com/url?sa=i&url=https%3A%2F%2Fforums.comunidades.riotgames.com%2Ft5%2FLOL-Guias%2FDiscord-para-aprender-a-jogar-de-Kindred-e-stream-de-coaching%2Ftd-p%2F849511&psig=AOvVaw07Gf_I0ItJm7DcCA9UdF1G&ust=1650934093825000&source=images&cd=vfe&ved=0CAwQjRxqFwoTCLj9kPX-rfcCFQAAAAAdAAAAABAD
+
+Ekko
+https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.leagueoflegends.com%2Fpt-br%2Fchampions%2Fekko%2F&psig=AOvVaw32yapJgmKdBptrk1AYlPtt&ust=1650934137565000&source=images&cd=vfe&ved=0CAwQjRxqFwoTCJCkhIn_rfcCFQAAAAAdAAAAABAD
+
+Aurelion Sol
+https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.leagueoflegends.com%2Fpt-br%2Fchampions%2Fekko%2F&psig=AOvVaw32yapJgmKdBptrk1AYlPtt&ust=1650934137565000&source=images&cd=vfe&ved=0CAwQjRxqFwoTCJCkhIn_rfcCFQAAAAAdAAAAABAD
+
+Sivir
+https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.leagueoflegends.com%2Fpt-br%2Fchampions%2Fsivir%2F&psig=AOvVaw0TfGbYuWFoRJDmhWQ6vmxz&ust=1650934174046000&source=images&cd=vfe&ved=0CAwQjRxqFwoTCLihkJv_rfcCFQAAAAAdAAAAABAD
+
+
+Amumu 0
+https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.leagueoflegends.com%2Fpt-br%2Fchampions%2Famumu%2F&psig=AOvVaw1zuxaPWwgt6saE0iNES1nr&ust=1650936348428000&source=images&cd=vfe&ved=0CAwQjRxqFwoTCOCcvaaHrvcCFQAAAAAdAAAAABAD
+
+rammus Ok
+

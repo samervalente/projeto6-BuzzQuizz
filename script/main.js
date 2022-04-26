@@ -28,6 +28,8 @@ let quizzesUsuario = [];
 let lastQuizz = [];
 //Tela 1 JS
 
+
+
 function listarTodosQuizzes() {
   let promise = axios.get(
     "https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes"
@@ -38,7 +40,7 @@ function listarTodosQuizzes() {
 function renderizarTodosQuizzes(resposta) {
   let todosQuizzes = document.querySelector(".quizzes");
   objetosAPI = resposta.data;
-  console.log(objetosAPI);
+
   for (let i = 0; i < resposta.data.length; i++) {
     todosQuizzes.innerHTML += `<div class="quizz" onclick="abrirQuizz('${resposta.data[i].id}')">
         <img src="${resposta.data[i].image}">
@@ -62,7 +64,7 @@ chamarServidorQuizzes();
 //Tela2 JS
 function abrirQuizz(id) {
   quizz = objetosAPI.find((objeto) => objeto.id === Number(id));
-  console.log(quizz);
+ 
   document.querySelector(".tela1").classList.add("esconder");
   document.querySelector(".tela3-4").classList.add("esconder");
   document.querySelector(".tela2").classList.remove("esconder");
@@ -119,7 +121,7 @@ function respostasCertas() {
 function renderizarResposta() {
   finalQuizz = document.querySelector(".final-quizz");
   const numeroSelecionados = document.querySelectorAll(".selecionado").length;
-  console.log(numeroSelecionados);
+
   const numeroBox = document.querySelectorAll(".quizz-box").length;
 
   if (numeroSelecionados === numeroBox) {
@@ -159,9 +161,7 @@ function escolherResposta(el) {
   for (let i = 0; i < parent.children.length; i++) {
     parent.children[i].classList.add("naoSelecionado");
     parent.children[i].removeAttribute("onclick");
-    console.log(
-      parent.querySelector(`figure:nth-child(${i + 1}) > div`).innerHTML
-    );
+  
     const ehCorreto = parent.querySelector(
       `figure:nth-child(${i + 1}) > div`
     ).innerHTML;
@@ -184,7 +184,7 @@ function scrollTop() {
 function scrollNext() {
   num++;
   const nextElement = document.querySelector(".box" + num).nextElementSibling;
-  console.log(nextElement);
+
   setTimeout(function () {
     nextElement.scrollIntoView({ behavior: "smooth", block: "center" });
   }, 2000);
@@ -220,18 +220,7 @@ function criarQuizz() {
 //TELA 3.1 (INFORMAÇÕES BÁSICAS DO QUIZZ)
 let pattern = /^https:\/\//i;
 
-function validarInformaçõesQuizz() {
-  tituloQuizz = document.querySelector(".tituloQuizz").value;
-  url = document
-    .querySelector(".infos-quizz")
-    .querySelector(".URLImagem").value;
-  quantidadePerguntas = Number(
-    document.querySelector(".QuantidadePerguntas").value
-  );
-  quantidadeNiveis = Number(document.querySelector(".QuantidadeNíveis").value);
-}
 
-/*
 function validarInformaçõesQuizz(){
   tituloQuizz = document.querySelector(".tituloQuizz").value
   url = document.querySelector(".infos-quizz").querySelector(".URLImagem").value
@@ -241,17 +230,20 @@ function validarInformaçõesQuizz(){
   if(pattern.test(url) && (!isNaN(quantidadePerguntas) && !isNaN(quantidadeNiveis)) && tituloQuizz.length > 20 && tituloQuizz.length < 65 && quantidadePerguntas >=3 && quantidadeNiveis >=2){
       return true
   }else{
-    alert("Dados inválidos")
       return false
   }
 }
-*/
+
 
 function prosseguir() {
-  document.querySelector(".container.tela3-1").classList.add("esconder");
-  document.querySelector(".container.tela3-2").classList.remove("esconder");
-  validarInformaçõesQuizz();
-  gerarQuantidadePerguntas();
+  if(validarInformaçõesQuizz()){
+    console.log(quizzObject)
+    document.querySelector(".container.tela3-1").classList.add("esconder");
+    document.querySelector(".container.tela3-2").classList.remove("esconder");
+    gerarQuantidadePerguntas();
+  }else{
+    alert("Dados Inválidos")
+  }
 }
 
 //TELA 3.2 (CRIAR AS PERGUNTAS)
@@ -340,8 +332,10 @@ function getInputs() {
     inputText = document
       .querySelectorAll(".div-pergunta")
       [i].querySelector(".infos")
-      .querySelectorAll("input");
-    quizzObject.questions.push({
+      .querySelectorAll("input")
+
+    quizzObject.questions.push(
+      {
       title: document
         .querySelectorAll(".div-pergunta")
         [i].querySelector(".infos")
@@ -397,21 +391,30 @@ function getInputs() {
         },
       ],
     });
-
-    /*
-      if(inputText[0].value.length < 20 || inputText[1].value.length < 6 || !inputText[1].value.startsWith("#") || (inputText[2].value == "" || inputText[4].value == "" || inputText[6].value == "" || inputText[8].value == "")) {
-        return false
-      }else{
-        return true
-      } */
   } //final do for
+  for(let i = 0 ; i < quantidadePerguntas; i++){
+    if(inputText[0].value.length < 20 || inputText[1].value.length < 6 || !inputText[1].value.startsWith("#") || inputText[2].value === "" ||inputText[4].value === "" || inputText[6].value === "" || inputText[8].value === "") {
+      return false
+    }else{
+      return true
+    } 
+  }
 }
 
 function criarNiveis() {
-  document.querySelector(".tela3-2").classList.add("esconder");
-  document.querySelector(".tela3-3").classList.remove("esconder");
-  getInputs();
-  renderizarNiveis();
+
+  
+  
+  if(  getInputs())
+  {console.log(quizzObject)
+    console.log(quantidadePerguntas)
+    document.querySelector(".tela3-2").classList.add("esconder");
+    document.querySelector(".tela3-3").classList.remove("esconder");
+    renderizarNiveis();
+  }else{
+    alert("Dados inválidos")
+  }
+  
 }
 
 //TELA 3.3 - CRIAR NÍVEIS
@@ -446,7 +449,9 @@ function renderizarNiveis() {
 }
 
 function getNiveis() {
+  let inputText
   for (let i = 0; i < quantidadeNiveis; i++) {
+     inputText = document.querySelectorAll(".div-nivel")[i].querySelector(".inputs").querySelectorAll("input")
     quizzObject.title = tituloQuizz;
     quizzObject.image = url;
 
@@ -471,17 +476,30 @@ function getNiveis() {
       ),
     });
   }
+
+  for(let i = 0 ; i < quantidadeNiveis; i++){
+    if(inputText[0].value < 10 || Number(inputText[1].value) < 0 || Number(inputText[1].value) > 100 || inputText[3].value < 30){
+      return false
+    }else{
+      return true
+    }
+  }
+
 }
 
 function finalizarQuizz() {
-  document.querySelector(".tela3-3").classList.add("esconder");
-  document.querySelector(".tela3-4").classList.remove("esconder");
-  getNiveis();
-  let promise = axios.post(
-    "https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes",
-    quizzObject
-  );
-  promise.then(getNew);
+  if(getNiveis()){
+    console.log(quizzObject)
+    document.querySelector(".tela3-3").classList.add("esconder");
+    document.querySelector(".tela3-4").classList.remove("esconder");
+    let promise = axios.post(
+      "https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes",
+      quizzObject
+    );
+    promise.then(getNew);
+  }else{
+    alert("Dados Inválidos")
+  }
 }
 
 function getNew() {
@@ -495,14 +513,13 @@ function getNew() {
 
 function obterDeNovo(resposta) {
   objetosAPI = resposta.data;
-  console.log(objetosAPI);
+ 
 }
 
 function getLastQuizz(response) {
   lastQuizz.push(response.data[0]);
   const lastQuizzSerializado = JSON.stringify(lastQuizz);
   localStorage.setItem("quizzUsuario", lastQuizzSerializado);
-  console.log(lastQuizz);
   renderizarTelaFinal();
   getQuizzUsuario();
 }
@@ -512,7 +529,6 @@ const divUsuario = document.querySelector(".tela1 .filled .quizz-usuario");
 function getQuizzUsuario() {
   const quizzesUsuarioSerializado = localStorage.getItem("quizzUsuario");
   quizzUsuario = JSON.parse(quizzesUsuarioSerializado);
-  console.log(quizzUsuario);
   if (quizzUsuario.length != 0) {
     document.querySelector(".quizzes-usuario").classList.add("esconder");
     document.querySelector(".filled").classList.remove("esconder");
@@ -534,7 +550,7 @@ function renderizarTelaFinal() {
   // document.querySelector(".tela3-3").classList.add("esconder");
   // document.querySelector(".tela3-4").classList.remove("esconder");
   let divRender = document.querySelector(".tela3-4");
-  console.log(lastQuizz);
+
   divRender.innerHTML = "";
   divRender.innerHTML = `
   <h4>Seu quizz está pronto!</h4>
@@ -546,9 +562,10 @@ function renderizarTelaFinal() {
   <p  onclick="voltarHome()">Voltar pra home</p>`;
 }
 
-function acessarQuizz() {}
 
 function voltarHome() {
   document.querySelector(".tela3-4").classList.add("esconder");
   document.querySelector(".tela1").classList.remove("esconder");
 }
+
+console.log(quizzObject)
